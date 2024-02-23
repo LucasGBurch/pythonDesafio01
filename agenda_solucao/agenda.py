@@ -10,12 +10,12 @@ def add_contact(contacts, contact_name, contact_phone, contact_email):
 # Visualizar Contatos
 def list_contacts(contacts):
   if len(contacts) > 0:
-    for indice, contact in enumerate(contacts, start=1):
+    for index, contact in enumerate(contacts, start=1):
       contact_name = contact["Nome"]
       contact_phone = contact["Telefone"]
       contact_email = contact["E-mail"]
       favorite = "Sim" if contact["Favorito"] else "Não"
-      print(f"{indice} - Nome: {contact_name} - Telefone: {contact_phone} - E-mail: {contact_email} - Favorito: {favorite}")
+      print(f"{index} - Nome: {contact_name} - Telefone: {contact_phone} - E-mail: {contact_email} - Favorito: {favorite}")
     return True
   else:
     print("Não há contatos na agenda. Tente adicionar novos.")
@@ -51,7 +51,22 @@ def mark_unmark_favorite(contacts, contact_number):
     print(f"Status de Favorito modificado para {contacts[contact_index]["Favorito"]}")
   else:
     print("Você deve escolher um número existente na lista. Tente novamente.")
+  return
 
+# Listar Contatos Favoritos
+def list_favorite_contacts(contacts):
+  favorite_contacts = []
+  print("Contatos Favoritos:")
+  for index, contact in enumerate(contacts, start=1):
+    if contact["Favorito"]:
+      favorite_contacts.append(contact)
+      contact_name = contact["Nome"]
+      contact_phone = contact["Telefone"]
+      contact_email = contact["E-mail"]
+      print(f"{index} - Nome: {contact_name} - Telefone: {contact_phone} - E-mail: {contact_email}")
+  if len(favorite_contacts) == 0:
+    print("Não há contatos favoritos. Tente marcar algum na opção anterior!")
+  return
 
 # ------------------------------------------------------
 # SEÇÃO DE EXECUÇÃO DA AGENDA:
@@ -86,7 +101,7 @@ while True:
       contact_number = input("Digite o número do contato na lista que você quer (des)favoritar: ")
       mark_unmark_favorite(contacts, contact_number)
   elif choosen_option == '5':
-    print(f"Opção {choosen_option} escolhida.")
+    list_favorite_contacts(contacts)
   elif choosen_option == '6':
     print(f"Opção {choosen_option} escolhida.")
   elif choosen_option == '7':
