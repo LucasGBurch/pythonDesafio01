@@ -68,6 +68,16 @@ def list_favorite_contacts(contacts):
     print("Não há contatos favoritos. Tente marcar algum na opção anterior!")
   return
 
+# Deletar Contatos Existentes
+def delete_contact(contacts, contact_number):
+  contact_index = int(contact_number) - 1
+
+  if contact_index >= 0 and contact_index < len(contacts):
+    print(f"Contato {contacts[contact_index]["Nome"]} deletado com sucesso.")
+    contacts.pop(contact_index)
+  else:
+    print("Você deve escolher um número existente na lista.")
+  return
 # ------------------------------------------------------
 # SEÇÃO DE EXECUÇÃO DA AGENDA:
 
@@ -103,7 +113,9 @@ while True:
   elif choosen_option == '5':
     list_favorite_contacts(contacts)
   elif choosen_option == '6':
-    print(f"Opção {choosen_option} escolhida.")
+    if list_contacts(contacts):
+      contact_number = input("Digite o número do contato na lista que você quer Deletar: ")
+      delete_contact(contacts, contact_number)
   elif choosen_option == '7':
     print("Agenda encerrada. Até a próxima! o/")
     break
